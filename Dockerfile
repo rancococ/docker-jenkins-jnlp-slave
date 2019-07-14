@@ -24,7 +24,6 @@ RUN addgroup -g ${gid} ${group} && \
     curl --create-dirs -fsSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar && \
     chmod 755 /usr/share/jenkins && \
     chmod 644 /usr/share/jenkins/slave.jar && \
-    chown -R ${user}:${group} /usr/local/bin/jenkins-slave && \
     chmod 755 /usr/local/bin/jenkins-slave
 
 LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols" Vendor="Jenkins project" Version="${VERSION}"
