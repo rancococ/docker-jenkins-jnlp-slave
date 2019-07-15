@@ -17,7 +17,7 @@ ENV AGENT_WORKDIR=${AGENT_WORKDIR}
 
 # install jenkins/slave.jar
 RUN groupadd -g ${gid} ${group} && \
-    useradd -d $HOME -u ${uid} -G ${group} ${user} && \
+    useradd -d $HOME -u ${uid} -g ${gid} ${user} && \
     curl --create-dirs -fsSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar && \
     chmod 755 /usr/share/jenkins && \
     chmod 644 /usr/share/jenkins/slave.jar
