@@ -1,5 +1,5 @@
-# from registry.cn-hangzhou.aliyuncs.com/rancococ/oraclejdk:1.8.0_192-alpine
-FROM registry.cn-hangzhou.aliyuncs.com/rancococ/oraclejdk:1.8.0_192-alpine
+# from registry.cn-hangzhou.aliyuncs.com/rancococ/oraclejdk:1.8.0_192-centos
+FROM registry.cn-hangzhou.aliyuncs.com/rancococ/oraclejdk:1.8.0_192-centos
 
 # maintainer
 MAINTAINER "rancococ" <rancococ@qq.com>
@@ -16,8 +16,8 @@ ENV HOME /home/${user}
 ENV AGENT_WORKDIR=${AGENT_WORKDIR}
 
 # install jenkins/slave.jar
-RUN addgroup -g ${gid} ${group} && \
-    adduser -h $HOME -u ${uid} -G ${group} -D ${user} && \
+RUN groupadd -g ${gid} ${group} && \
+    useradd -d $HOME -u ${uid} -G ${group} ${user} && \
     curl --create-dirs -fsSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar && \
     chmod 755 /usr/share/jenkins && \
     chmod 644 /usr/share/jenkins/slave.jar
