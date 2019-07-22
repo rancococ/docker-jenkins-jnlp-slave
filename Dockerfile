@@ -4,6 +4,9 @@ FROM registry.cn-hangzhou.aliyuncs.com/rancococ/oraclejdk:1.8.0_192-3-alpine
 # maintainer
 MAINTAINER "rancococ" <rancococ@qq.com>
 
+# set label
+LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols" Vendor="Jenkins project" Version="${VERSION}"
+
 # set arg info
 ARG VERSION=3.29
 ARG user=jenkins
@@ -24,10 +27,10 @@ RUN addgroup -g ${gid} ${group} && \
     curl --create-dirs -fsSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar && \
     chmod 755 /usr/share/jenkins && \
     chmod 644 /usr/share/jenkins/slave.jar && \
-    chmod 755 /usr/local/bin/jenkins-slave
+    chmod 755 /usr/local/bin/jenkins-slave && \
+    chown ${uid}:${gid} /usr/local/bin/jenkins-slave
 
-LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols" Vendor="Jenkins project" Version="${VERSION}"
-
+# set user
 USER ${user}
 
 RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR}
