@@ -39,10 +39,7 @@ RUN mkdir -p /home/${USER}/.jenkins && \
     mkdir -p ${AGENT_WORKDIR}
 
 # set volume info
-VOLUME /home/${USER}/.jenkins
-VOLUME /home/${USER}/.gitconfig
-VOLUME /home/${USER}/.subversion
-VOLUME ${AGENT_WORKDIR}
+VOLUME ["/home/${USER}/.jenkins", "/home/${USER}/.subversion", "${AGENT_WORKDIR}"]
 
 # set work home
 WORKDIR /home/${USER}
