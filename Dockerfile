@@ -33,10 +33,15 @@ RUN groupadd -g ${GID} ${GROUP} && \
 # set user
 USER ${USER}
 
-RUN mkdir /home/${USER}/.jenkins && mkdir -p ${AGENT_WORKDIR}
+RUN mkdir -p /home/${USER}/.jenkins && \
+    mkdir -p /home/${USER}/.gitconfig && \
+    mkdir -p /home/${USER}/.subversion && \
+    mkdir -p ${AGENT_WORKDIR}
 
 # set volume info
 VOLUME /home/${USER}/.jenkins
+VOLUME /home/${USER}/.gitconfig
+VOLUME /home/${USER}/.subversion
 VOLUME ${AGENT_WORKDIR}
 
 # set work home
