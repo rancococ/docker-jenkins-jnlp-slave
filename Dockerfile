@@ -34,7 +34,7 @@ RUN groupadd -g ${GID} ${GROUP} && \
 USER ${USER}
 
 RUN mkdir -p /home/${USER}/.jenkins && \
-    mkdir -p /home/${USER}/.gitconfig && \
+    touch /home/${USER}/.gitconfig && \
     mkdir -p /home/${USER}/.subversion && \
     mkdir -p ${AGENT_WORKDIR}
 
